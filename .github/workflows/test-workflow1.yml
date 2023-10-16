@@ -1,4 +1,4 @@
-name: CI CTP
+name: test workflow 1
 
 on:
   workflow_dispatch:

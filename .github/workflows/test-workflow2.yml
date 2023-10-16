@@ -1,13 +1,11 @@
-name: test-workflow2
+name: test workflow 2
 on:
-#   push:
-#     branches: AutomationBranch
-  workflow_call: # adding the workflow_dispatch so it can be triggered manually
+  workflow_call:
   
 jobs:
   print_text:
     runs-on: Linux
     steps:
-      - name: Set the variables
+      - name: Run ls
         run: |
           ls

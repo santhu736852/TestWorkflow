@@ -1,0 +1,11 @@
+name: CI CTP
+
+on:
+  workflow_dispatch:
+
+permissions: write-all
+
+jobs:
+  call-workflow:
+    uses: ./.github/workflows/test-workflow2.yml
+    secrets: inherit

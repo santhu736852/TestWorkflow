@@ -32,6 +32,7 @@ jobs:
     secrets: inherit
   
   print-component:
+    needs: auto-label
     runs-on: Linux
     steps:
       - name: print details

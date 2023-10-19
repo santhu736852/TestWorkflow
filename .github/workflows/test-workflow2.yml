@@ -14,4 +14,4 @@ jobs:
     - name: Run ls
       run: |
         ls
-        ${{ JSON.stringify(github.event.pull_request.labels.*.name) }}
+        ${{ toString(github.event.pull_request.labels.*.name) }}

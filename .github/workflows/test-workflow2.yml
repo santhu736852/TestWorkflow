@@ -13,5 +13,4 @@ jobs:
         
     - name: Run ls
       run: |
-       a=${echo "${{ toJSON(github.event.pull_request.labels.*.name) }}"// /}
-       echo $a
+       echo "${{ toJSON(github.event.pull_request.labels.*.name) }}

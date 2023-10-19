@@ -39,21 +39,18 @@ jobs:
 
   call-workflow-ci-ui:
     needs: [ call-workflow2-1,  call-workflow2-2 ]
-    # if: ${{ contains(github.event.pull_request.labels.*.name, 'flow-ui-fix') && !contains(github.event.pull_request.labels.*.name, 'flow-ctp-fix') && !contains(github.event.pull_request.labels.*.name, 'flow-is-fix') }}
     if: ${{ needs.filter-path.outputs.ui == 'true' }}
     uses: ./.github/workflows/ci-ui.yml
     secrets: inherit
 
   call-workflow-ci-ctp:
     needs: [ call-workflow2-1,  call-workflow2-2 ]
-    # if: ${{ !contains(github.event.pull_request.labels.*.name, 'flow-ui-fix') && contains(github.event.pull_request.labels.*.name, 'flow-ctp-fix') && !contains(github.event.pull_request.labels.*.name, 'flow-is-fix') }}
     if: ${{ needs.filter-path.outputs.ctp == 'true' }}
     uses: ./.github/workflows/ci-ctp.yml
     secrets: inherit
 
   call-workflow-ci-is:
     needs: [ call-workflow2-1,  call-workflow2-2 ]
-    # if: ${{ !contains(github.event.pull_request.labels.*.name, 'flow-ui-fix') && !contains(github.event.pull_request.labels.*.name, 'flow-ctp-fix') && contains(github.event.pull_request.labels.*.name, 'flow-is-fix') }}
     if: ${{ needs.filter-path.outputs.is == 'true' }}
     uses: ./.github/workflows/ci-is.yml
     secrets: inherit

@@ -23,6 +23,7 @@ jobs:
   #       ref: ${{ github.head_ref }}
   
       - name: Run ls
+        if: ${{ env.component }} = 'IS'
         run: |
-          echo "${{ env.component }}"
+          ls
         

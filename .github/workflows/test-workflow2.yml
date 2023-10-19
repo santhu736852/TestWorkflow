@@ -9,3 +9,4 @@ jobs:
       - name: Run ls
         run: |
           ls
+          echo '${{ github.changed_files }}'

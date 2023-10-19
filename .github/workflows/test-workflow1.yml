@@ -11,6 +11,7 @@ jobs:
     uses: ./.github/workflows/test-workflow2.yml
     secrets: inherit
   
-  # call-workflow3:
-  #   uses: ./.github/workflows/test-workflow3.yml
-  #   secrets: inherit
+  call-workflow3:
+    needs: call-workflow2
+    uses: ./.github/workflows/test-workflow3.yml
+    secrets: inherit

@@ -2,8 +2,6 @@ name: test workflow 2
 on:
   workflow_call:
 
-env:
-  component: component
 jobs:
   validate-label:
     runs-on: Linux
@@ -25,7 +23,6 @@ jobs:
   #       ref: ${{ github.head_ref }}
   
       - name: Run ls
-        if: ${{ contains(github.event.pull_request.labels.*.name, 'bug') && contains(github.event.pull_request.labels.*.name, 'bug1') }}
         run: |
           ls
         

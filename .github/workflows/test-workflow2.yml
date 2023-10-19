@@ -9,4 +9,4 @@ jobs:
       - name: Run ls
         run: |
           ls
-          echo "${{ github.labels.name }}"
+          echo "${{ github.labels_name }}"

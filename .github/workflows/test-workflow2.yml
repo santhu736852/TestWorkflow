@@ -8,13 +8,13 @@ jobs:
   validate-label:
     runs-on: Linux
     steps:
-      - name: set Env Variable component
-        run: |
-          if  (${{ contains(github.event.pull_request.labels.*.name, 'bug') && !contains(github.event.pull_request.labels.*.name, 'bug1') }}) 
-          then
-              echo "component=IS" >> "$GITHUB_ENV"
-              # echo "set Value"
-          fi
+      # - name: set Env Variable component
+      #   run: |
+      #     if  (${{ contains(github.event.pull_request.labels.*.name, 'bug') && !contains(github.event.pull_request.labels.*.name, 'bug1') }}) 
+      #     then
+      #         echo "component=IS" >> "$GITHUB_ENV"
+      #         # echo "set Value"
+      #     fi
   
   # print_text:
   #   runs-on: Linux
@@ -25,7 +25,7 @@ jobs:
   #       ref: ${{ github.head_ref }}
   
       - name: Run ls
-        if: ${{ env.component }} == IS
+        if: ${{ contains(github.event.pull_request.labels.*.name, 'bug') && !contains(github.event.pull_request.labels.*.name, 'bug1') }}
         run: |
           ls
         

@@ -13,7 +13,6 @@ jobs:
               echo "component=IS" >> "$GITHUB_ENV"
               # echo "set Value"
           fi
-          # echo "component=IS" >> "$GITHUB_ENV"
   
   # print_text:
   #   runs-on: Linux

@@ -1,8 +1,7 @@
 name: test workflow 1
 
 on:
-  workflow_dispatch:
-  pull_request:
+  workflow_call:
 
 permissions: write-all
 
@@ -14,4 +13,8 @@ jobs:
   call-workflow3:
     needs: call-workflow2
     uses: ./.github/workflows/test-workflow3.yml
+    secrets: inherit
+
+  call-workflow2-parallel:
+    uses: ./.github/workflows/test-workflow2.yml
     secrets: inherit

@@ -1,0 +1,11 @@
+name: CI IS
+
+on:
+  workflow_call:
+
+permissions: write-all
+
+jobs:
+  call-workflow1:
+    uses: ./.github/workflows/test-workflow1.yml
+    secrets: inherit

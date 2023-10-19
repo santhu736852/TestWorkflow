@@ -11,10 +11,10 @@ jobs:
     steps:
       - name: set Env Variable component
         run: |
-          if [[ ${{ contains(github.event.pull_request.labels.*.names, 'bug') }} ]]
+          if [[ ${{ contains(github.event.pull_request.labels.*.name, 'bug') }} ]]
             then
               echo "component='IS'" >> $env:GITHUB_ENV
-            fi
+          fi
   
   # print_text:
   #   runs-on: Linux

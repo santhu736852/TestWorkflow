@@ -1,6 +1,12 @@
 name: test workflow 2
 on:
   workflow_call:
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  OWNER: ${{ github.repository_owner }}
+  REPO_NAME: ${{ github.event.repository.name }}
+  PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
   
 jobs:
   print_text:
@@ -13,4 +19,6 @@ jobs:
         
     - name: Run ls
       run: |
-       echo "${{ toJSON(github.event.pull_request.labels.*.name) }}
+       # echo "${{ toJSON(github.event.pull_request.labels.*.name) }}
+       labels="$(gh api repos/$OWNER/$REPO_NAME/pulls/$PULL_REQUEST_NUMBER --jq '.labels.[].name')"
+       echo "$labels"

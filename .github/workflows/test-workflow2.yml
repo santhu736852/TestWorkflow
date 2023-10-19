@@ -1,9 +1,6 @@
 name: test workflow 2
 on:
   workflow_call:
-
-env:
-  component: component
   
 jobs:
   validate-label:

@@ -7,21 +7,20 @@ on:
 permissions: write-all
 
 jobs:
-  # filter-path:
-  #   runs-on: Linux
-  #   steps:
-  #     - name: filterPath Step
-  #       uses: AIM/paths-filter@v2
-  #       id: filter
-  #       with:
-  #         filters: |
-  #           backend:
-  #             - 'modules/**'
-  #             - 'packages/**'
-  #           frontend:
-  #             - 'webapps/**'
-  #           scripts:
-  #             - scripts/**
+  filter-path:
+    runs-on: Linux
+    steps:
+      - name: filterPath Step
+        uses: AIM/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            ui:
+              - 'Folder1/**'
+            ctp:
+              - 'Folder2/**'
+            is:
+              - 'Folder3/**'
 
   auto-label:
     uses: ./.github/workflows/test-workflow2.yml
@@ -39,13 +38,15 @@ jobs:
 
   call-workflow-ci-ui:
     needs: [ call-workflow2-1,  call-workflow2-2 ]
-    if: ${{ contains(github.event.pull_request.labels.*.name, 'flow-ui-fix') && !contains(github.event.pull_request.labels.*.name, 'flow-ctp-fix') && !contains(github.event.pull_request.labels.*.name, 'flow-is-fix') }}
+    # if: ${{ contains(github.event.pull_request.labels.*.name, 'flow-ui-fix') && !contains(github.event.pull_request.labels.*.name, 'flow-ctp-fix') && !contains(github.event.pull_request.labels.*.name, 'flow-is-fix') }}
+    if: ${{ needs.filter-path.outputs.ui == 'true' }}
     uses: ./.github/workflows/ci-ui.yml
     secrets: inherit
 
   call-workflow-ci-ctp:
     needs: [ call-workflow2-1,  call-workflow2-2 ]
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'flow-ui-fix') && contains(github.event.pull_request.labels.*.name, 'flow-ctp-fix') && !contains(github.event.pull_request.labels.*.name, 'flow-is-fix') }}
+    # if: ${{ !contains(github.event.pull_request.labels.*.name, 'flow-ui-fix') && contains(github.event.pull_request.labels.*.name, 'flow-ctp-fix') && !contains(github.event.pull_request.labels.*.name, 'flow-is-fix') }}
+    if: ${{ needs.filter-path.outputs.ctp == 'true' }}
     uses: ./.github/workflows/ci-ctp.yml
     secrets: inherit
 

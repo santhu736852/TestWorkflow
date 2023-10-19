@@ -27,13 +27,22 @@ jobs:
     uses: ./.github/workflows/test-workflow2.yml
     secrets: inherit
   
+  print-component:
+    runs-on: Linux
+    steps:
+      - name: print details
+        run: |
+         echo "${{ needs.filter-path.outputs.ui }}"
+         echo "${{ needs.filter-path.outputs.ctp }}"
+         echo "${{ needs.filter-path.outputs.is }}"
+  
   call-workflow2-1:
-    needs: auto-label
+    needs: print-component
     uses: ./.github/workflows/test-workflow2.yml
     secrets: inherit
 
   call-workflow2-2:
-    needs: auto-label
+    needs: print-component
     uses: ./.github/workflows/test-workflow2.yml
     secrets: inherit
 

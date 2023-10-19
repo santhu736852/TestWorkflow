@@ -3,7 +3,7 @@ on:
   workflow_call:
 
 env:
-  component: component; 
+  component: component
   
 jobs:
   validate-label:
@@ -11,9 +11,9 @@ jobs:
     steps:
       - name: set Env Variable component
         run: |
-          if [[ ${{ contains(github.event.pull_request.labels.*.names, 'flow-is-fix') }} ]]
+          if [[ ${{ contains(github.event.pull_request.labels.*.names, 'bug') }} ]]
             then
-              ${{ env.component }} = IS
+              echo "component='IS'" >> $env:GITHUB_ENV
             fi
   
   # print_text:

@@ -12,6 +12,4 @@ jobs:
         ref: ${{ github.head_ref }}
         
     - name: Run ls
-      run: |
-        ls
-        ${{ toJSON(github.event.pull_request.labels.*.name) }}
+      run: echo "${{ toJSON(github.event.pull_request.labels.*.name) }}"

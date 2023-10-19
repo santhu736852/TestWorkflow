@@ -11,7 +11,7 @@ jobs:
     runs-on: Linux
     steps:
       - name: filterPath Step
-        uses: AIM/paths-filter@v2
+        uses: dorny/paths-filter@v2
         id: filter
         with:
           filters: |
@@ -23,6 +23,7 @@ jobs:
               - 'Folder3/**'
 
   auto-label:
+    needs: filter-path
     uses: ./.github/workflows/test-workflow2.yml
     secrets: inherit
   
@@ -52,7 +53,8 @@ jobs:
 
   call-workflow-ci-is:
     needs: [ call-workflow2-1,  call-workflow2-2 ]
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'flow-ui-fix') && !contains(github.event.pull_request.labels.*.name, 'flow-ctp-fix') && contains(github.event.pull_request.labels.*.name, 'flow-is-fix') }}
+    # if: ${{ !contains(github.event.pull_request.labels.*.name, 'flow-ui-fix') && !contains(github.event.pull_request.labels.*.name, 'flow-ctp-fix') && contains(github.event.pull_request.labels.*.name, 'flow-is-fix') }}
+    if: ${{ needs.filter-path.outputs.is == 'true' }}
     uses: ./.github/workflows/ci-is.yml
     secrets: inherit
 

@@ -3,9 +3,6 @@ name: test workflow 1
 on:
   workflow_dispatch:
   pull_request:
-    paths:
-      - "Folder1/**"
-      - "!Folder2/**"
 
 permissions: write-all
 
@@ -15,5 +12,6 @@ jobs:
     secrets: inherit
   
   call-workflow3:
+    needs: call-workflow2
     uses: ./.github/workflows/test-workflow3.yml
     secrets: inherit

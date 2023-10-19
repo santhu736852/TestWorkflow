@@ -6,7 +6,12 @@ jobs:
   print_text:
     runs-on: Linux
     steps:
-      - name: Run ls
-        run: |
-          ls
-          echo '${{ github.event.pull_request.labels.name }}'
+    - name: Checkout 
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
+        
+      # - name: Run ls
+      #   run: |
+      #     ls
+      #     echo '${{ github.event.pull_request.labels.name }}'

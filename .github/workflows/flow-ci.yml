@@ -9,6 +9,10 @@ permissions: write-all
 jobs:
   filter-path:
     runs-on: Linux
+    outputs:
+      ui: ${{ steps.filter.outputs.ui }}
+      ctp: ${{ steps.filter.outputs.ctp }}
+      is: ${{ steps.filter.outputs.is }}
     steps:
       - name: filterPath Step
         uses: dorny/paths-filter@v2

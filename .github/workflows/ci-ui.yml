@@ -9,7 +9,3 @@ jobs:
   call-workflow1:
     uses: ./.github/workflows/test-workflow1.yml
     secrets: inherit
-
-  call-workflow2-parallel:
-    uses: ./.github/workflows/test-workflow2.yml
-    secrets: inherit

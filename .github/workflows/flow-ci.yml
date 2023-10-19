@@ -44,3 +44,7 @@ jobs:
     if: ${{ !contains(github.event.pull_request.labels.*.name, 'flow-ui-fix') && !contains(github.event.pull_request.labels.*.name, 'flow-ctp-fix') && contains(github.event.pull_request.labels.*.name, 'flow-is-fix') }}
     uses: ./.github/workflows/ci-is.yml
     secrets: inherit
+
+  call-workflow2-parallel:
+    uses: ./.github/workflows/test-workflow2.yml
+    secrets: inherit

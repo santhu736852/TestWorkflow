@@ -1,6 +1,9 @@
 name: test workflow 2
 on:
   workflow_call:
+
+env:
+  component: component
   
 jobs:
   validate-label:
@@ -10,7 +13,7 @@ jobs:
         run: |
           if [[ ${{ contains(github.event.pull_request.labels.*.name, 'bug') }} ]]
             then
-              echo "component='IS'" >> $env:GITHUB_ENV
+              echo "component=IS" >> $env:GITHUB_ENV
           fi
   
   # print_text:

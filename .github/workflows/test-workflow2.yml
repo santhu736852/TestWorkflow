@@ -3,22 +3,28 @@ on:
   workflow_call:
 
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  OWNER: ${{ github.repository_owner }}
-  REPO_NAME: ${{ github.event.repository.name }}
-  PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
+  component: component; 
   
 jobs:
-  print_text:
+  validate-label:
     runs-on: Linux
     steps:
-    - name: Checkout 
-      uses: actions/checkout@v2
-      with:
-        ref: ${{ github.head_ref }}
+      - name: set Env Variable component
+        run: |
+          if [[ ${{ contains(github.event.pull_request.labels.*.names, 'flow-is-fix') }} ]]
+            then
+              ${{ env.component }} = IS
+            fi
+  
+  # print_text:
+  #   runs-on: Linux
+  #   steps:
+  #   - name: Checkout 
+  #     uses: actions/checkout@v2
+  #     with:
+  #       ref: ${{ github.head_ref }}
+  
+      - name: Run ls
+        run: |
+          echo "${{ env.component }}"
         
-    - name: Run ls
-      run: |
-       # echo "${{ toJSON(github.event.pull_request.labels.*.name) }}
-       labels="$(gh api repos/$OWNER/$REPO_NAME/pulls/$PULL_REQUEST_NUMBER --jq '.labels.[].name')"
-       echo "$labels"

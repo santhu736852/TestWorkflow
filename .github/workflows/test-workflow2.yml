@@ -13,5 +13,5 @@ jobs:
         
     - name: Run ls
       run: |
-        IFS=''; echo "${{ toJSON(github.event.pull_request.labels.*.name) }}"
+        IFS=echo "${{ toJSON(github.event.pull_request.labels.*.name) }}"
         echo $IFS

@@ -1,0 +1,34 @@
+name: test workflow 1
+
+on:
+  workflow_dispatch:
+
+env:
+  testData: 1
+
+permissions: write-all
+
+jobs:
+  print_text:
+    runs-on: Linux
+    steps:
+      - name: Run ls
+        run: |
+          ls
+
+  call-workflow2:
+    needs: print_text
+    if: success()
+    uses: ./.github/workflows/test-workflow2.yml
+    secrets: inherit
+  
+  call-workflow3:
+    needs: print_text
+    if: failure()
+    uses: ./.github/workflows/test-workflow3.yml
+    secrets: inherit
+
+  call-workflow2-again:
+    needs: [call-workflow2, call-workflow3]
+    uses: ./.github/workflows/test-workflow2.yml
+    secrets: inherit

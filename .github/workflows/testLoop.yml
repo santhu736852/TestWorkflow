@@ -18,7 +18,7 @@ jobs:
 
   call-workflow2:
     needs: print_text
-    if: success()
+    if: failure()
     uses: ./.github/workflows/test-workflow2.yml
     secrets: inherit
   

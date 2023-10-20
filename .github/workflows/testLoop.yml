@@ -24,7 +24,7 @@ jobs:
   
   call-workflow3:
     needs: print_text
-    if: failure()
+    if: success()
     uses: ./.github/workflows/test-workflow3.yml
     secrets: inherit
 

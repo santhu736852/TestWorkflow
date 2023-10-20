@@ -30,5 +30,6 @@ jobs:
 
   call-workflow2-again:
     needs: [call-workflow2, call-workflow3]
+    if: needs.call-workflow3.result != 'failure'
     uses: ./.github/workflows/test-workflow2.yml
     secrets: inherit

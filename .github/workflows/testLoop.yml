@@ -25,7 +25,7 @@ jobs:
     secrets: inherit
   
   call-workflow3:
-    name: Workflow3
+    name: Workflow 3
     needs: print_ls
     if: success()
     uses: ./.github/workflows/test-workflow3.yml

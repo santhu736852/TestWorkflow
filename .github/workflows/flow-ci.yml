@@ -31,23 +31,14 @@ jobs:
     uses: ./.github/workflows/test-workflow2.yml
     secrets: inherit
   
-  print-component:
-    needs: auto-label
-    runs-on: Linux
-    steps:
-      - name: print details
-        run: |
-         echo "${{ needs.filter-path.outputs.ui }}"
-         echo "${{ needs.filter-path.outputs.ctp }}"
-         echo "${{ needs.filter-path.outputs.is }}"
-  
   call-workflow2-1:
-    needs: print-component
+    needs: auto-label
     uses: ./.github/workflows/test-workflow2.yml
     secrets: inherit
 
   call-workflow2-2:
-    needs: print-component
+    needs: auto-label
+    if: failure()
     uses: ./.github/workflows/test-workflow2.yml
     secrets: inherit
 
@@ -70,5 +61,6 @@ jobs:
     secrets: inherit
 
   call-workflow2-parallel:
+    needs: [ call-workflow-ci-ui, call-workflow-ci-ctp, call-workflow-ci-is ]
     uses: ./.github/workflows/test-workflow2.yml
     secrets: inherit

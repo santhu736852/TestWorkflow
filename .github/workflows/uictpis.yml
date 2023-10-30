@@ -3,21 +3,21 @@ name: UI CTP IS
 on:
   workflow_call:
     inputs:
-        ui:
-          description: UI component
-          required: true
-          type: string
-          default: 'false'
-        ctp:
-          description: CTP component
-          required: true
-          type: string
-          default: 'false'
-        is:
-          description: IS component
-          required: true
-          type: string
-          default: 'false'
+      ui:
+        description: UI component
+        required: true
+        type: string
+        default: 'false'
+      ctp:
+        description: CTP component
+        required: true
+        type: string
+        default: 'false'
+      is:
+        description: IS component
+        required: true
+        type: string
+        default: 'false'
 
 permissions: write-all
 

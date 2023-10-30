@@ -39,6 +39,10 @@ jobs:
   call-workflow-ci-ui-ctp-is:
     needs: [ call-workflow2job ]
     uses: ./.github/workflows/uictpis.yml
+    with:
+      ui: ${{ needs.filter-path.outputs.ui }}
+      ctp: ${{ needs.filter-path.outputs.ctp }}
+      is: ${{ needs.filter-path.outputs.is }}
     secrets: inherit
 
   # call-workflow-ci-ctp:

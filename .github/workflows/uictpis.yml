@@ -1,0 +1,49 @@
+name: UI CTP IS
+
+on:
+  workflow_call:
+    inputs:
+        ui:
+          description: UI component
+          required: true
+          type: string
+          default: 'false'
+        ctp:
+          description: CTP component
+          required: true
+          type: string
+          default: 'false'
+        is:
+          description: IS component
+          required: true
+          type: string
+          default: 'false'
+
+permissions: write-all
+
+jobs:
+  print-values:
+    if: always()
+    name: Print ls
+    runs-on: Linux
+    steps:
+      - name: Run ls
+        run: |
+         echo ${{ inputs.ui }}
+         echo ${{ inputs.ctp }}
+         echo ${{ inputs.is }}
+      
+  call-workflow-ci-ui:
+    if: ${{ inputs.ui == 'true' }}
+    uses: ./.github/workflows/ci-ui.yml
+    secrets: inherit
+
+  call-workflow-ci-ctp:
+    if: ${{ inputs.ctp == 'true' }}
+    uses: ./.github/workflows/ci-ctp.yml
+    secrets: inherit
+
+  call-workflow-ci-is:
+    if: ${{ inputs.is == 'true' }}
+    uses: ./.github/workflows/ci-is.yml
+    secrets: inherit

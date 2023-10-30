@@ -9,7 +9,8 @@ env:
 permissions: write-all
 
 jobs:
-  print_text:
+  print_ls:
+    name: Print ls
     runs-on: Linux
     steps:
       - name: Run ls
@@ -17,18 +18,22 @@ jobs:
           ls
 
   call-workflow2:
-    needs: print_text
-    if: success()
+    name: Workflow2
+    needs: print_ls
+    if: failure()
     uses: ./.github/workflows/test-workflow2.yml
     secrets: inherit
   
   call-workflow3:
-    needs: print_text
-    if: failure()
+    name: Workflow 3
+    needs: print_ls
+    if: success()
     uses: ./.github/workflows/test-workflow3.yml
     secrets: inherit
 
   call-workflow2-again:
+    name: Workflow2 Again
     needs: [call-workflow2, call-workflow3]
+    if: always() && needs.call-workflow3.result != 'failure' && needs.call-workflow2.result != 'failure'
     uses: ./.github/workflows/test-workflow2.yml
     secrets: inherit

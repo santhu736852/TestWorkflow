@@ -31,45 +31,31 @@ jobs:
     uses: ./.github/workflows/test-workflow2.yml
     secrets: inherit
   
-  print-component:
+  call-workflow2job:
     needs: auto-label
-    runs-on: Linux
-    steps:
-      - name: print details
-        run: |
-         echo "${{ needs.filter-path.outputs.ui }}"
-         echo "${{ needs.filter-path.outputs.ctp }}"
-         echo "${{ needs.filter-path.outputs.is }}"
-  
-  call-workflow2-1:
-    needs: print-component
-    uses: ./.github/workflows/test-workflow2.yml
+    uses: ./.github/workflows/callWorkflow2.yml
     secrets: inherit
 
-  call-workflow2-2:
-    needs: print-component
-    if: failure();
-    uses: ./.github/workflows/test-workflow2.yml
+  call-workflow-ci-ui-ctp-is:
+    needs: [ call-workflow2job, filter-path ]
+    uses: ./.github/workflows/uictpis.yml
+    with:
+      ui: "${{ needs.filter-path.outputs.ui }}"
+      ctp: "${{ needs.filter-path.outputs.ui }}"
+      is: "${{ needs.filter-path.outputs.ui }}"
     secrets: inherit
 
-  call-workflow-ci-ui:
-    needs: [ call-workflow2-1,  call-workflow2-2 ]
-    if: ${{ needs.filter-path.outputs.ui == 'true' }}
-    uses: ./.github/workflows/ci-ui.yml
-    secrets: inherit
+  # call-workflow-ci-ctp:
+  #   needs: [ call-workflow2job ]
+  #   uses: ./.github/workflows/ci-ctp.yml
+  #   secrets: inherit
 
-  call-workflow-ci-ctp:
-    needs: [ call-workflow2-1,  call-workflow2-2 ]
-    if: ${{ needs.filter-path.outputs.ctp == 'true' }}
-    uses: ./.github/workflows/ci-ctp.yml
-    secrets: inherit
+  # call-workflow-ci-is:
+  #   needs: [ call-workflow2job ]
+  #   uses: ./.github/workflows/ci-is.yml
+  #   secrets: inherit
 
-  call-workflow-ci-is:
-    needs: [ call-workflow2-1,  call-workflow2-2 ]
-    if: ${{ needs.filter-path.outputs.is == 'true' }}
-    uses: ./.github/workflows/ci-is.yml
-    secrets: inherit
-
-  call-workflow2-parallel:
-    uses: ./.github/workflows/test-workflow2.yml
+  call-workflow2-series:
+    needs: [ call-workflow-ci-ui-ctp-is ]
+    uses: ./.github/workflows/test-workflow3.yml
     secrets: inherit

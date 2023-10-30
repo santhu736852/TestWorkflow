@@ -1,0 +1,17 @@
+name: FLOW CI
+
+on:
+  workflow_call:
+
+permissions: write-all
+
+jobs:
+  call-workflow2-1:
+    if: success()
+    uses: ./.github/workflows/test-workflow2.yml
+    secrets: inherit
+
+  call-workflow2-2:
+    if: failure()
+    uses: ./.github/workflows/test-workflow3.yml
+    secrets: inherit

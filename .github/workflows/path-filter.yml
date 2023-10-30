@@ -1,0 +1,37 @@
+name: FLOW
+
+on:
+  workflow_dispatch:
+#   pull_request:
+
+permissions: write-all
+
+jobs:
+  filter-path:
+    runs-on: Linux
+    outputs:
+      ui: ${{ steps.filter.outputs.ui }}
+      ctp: ${{ steps.filter.outputs.ctp }}
+      is: ${{ steps.filter.outputs.is }}
+    steps:
+      - name: filterPath Step
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            ui:
+              - 'Folder1/**'
+            ctp:
+              - 'Folder2/**'
+            is:
+              - 'Folder3/**'
+
+  print-path:
+    needs: filter-path
+    runs-on: Linux
+    steps: 
+      - name: filterPath display
+        run: |
+          echo ${{ needs.filter-path.outputs.ui }}
+          echo ${{ needs.filter-path.outputs.ctp }}
+          echo ${{ needs.filter-path.outputs.is }}

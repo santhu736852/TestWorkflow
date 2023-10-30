@@ -3,7 +3,8 @@ on:
   workflow_call:
   
 jobs:
-  print_text:
+  print_ls:
+    name: Print ls
     runs-on: Linux
     steps:
       - name: Run ls

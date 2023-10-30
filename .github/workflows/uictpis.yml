@@ -22,6 +22,17 @@ on:
 permissions: write-all
 
 jobs:
+  print-values:
+    if: always()
+    name: Print ls
+    runs-on: Linux
+    steps:
+      - name: Run ls
+        run: |
+         echo "${{ inputs.ui }}"
+         echo "${{ inputs.ctp }}"
+         echo "${{ inputs.is }}"
+      
   call-workflow-ci-ui:
     if: ${{ inputs.ui == 'true' }}
     uses: ./.github/workflows/ci-ui.yml

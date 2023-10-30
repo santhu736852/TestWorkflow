@@ -9,4 +9,4 @@ jobs:
     steps:
       - name: Run ls
         run: |
-          lsx
+          ls

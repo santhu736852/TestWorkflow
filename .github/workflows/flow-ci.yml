@@ -31,31 +31,25 @@ jobs:
     uses: ./.github/workflows/test-workflow2.yml
     secrets: inherit
   
-  call-workflow2-1:
+  call-workflow2job:
     needs: auto-label
-    uses: ./.github/workflows/test-workflow2.yml
-    secrets: inherit
-
-  call-workflow2-2:
-    needs: auto-label
-    if: failure()
-    uses: ./.github/workflows/test-workflow2.yml
+    uses: ./.github/workflows/callWorkflow2.yml
     secrets: inherit
 
   call-workflow-ci-ui:
-    needs: [ call-workflow2-1,  call-workflow2-2 ]
+    needs: [ call-workflow2job ]
     if: ${{ needs.filter-path.outputs.ui == 'true' }}
     uses: ./.github/workflows/ci-ui.yml
     secrets: inherit
 
   call-workflow-ci-ctp:
-    needs: [ call-workflow2-1,  call-workflow2-2 ]
+    needs: [ call-workflow2job ]
     if: ${{ needs.filter-path.outputs.ctp == 'true' }}
     uses: ./.github/workflows/ci-ctp.yml
     secrets: inherit
 
   call-workflow-ci-is:
-    needs: [ call-workflow2-1,  call-workflow2-2 ]
+    needs: [ call-workflow2job ]
     if: ${{ needs.filter-path.outputs.is == 'true' }}
     uses: ./.github/workflows/ci-is.yml
     secrets: inherit

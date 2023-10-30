@@ -53,5 +53,5 @@ jobs:
 
   call-workflow2-series:
     needs: [ call-workflow-ci-ui-ctp-is ]
-    uses: ./.github/workflows/test-workflow2.yml
+    uses: ./.github/workflows/test-workflow3.yml
     secrets: inherit

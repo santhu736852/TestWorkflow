@@ -1,0 +1,28 @@
+name: test workflow 2
+on:
+  workflow_call:
+
+jobs:
+  validate-label:
+    runs-on: Linux
+    steps:
+      # - name: set Env Variable component
+      #   run: |
+      #     if  (${{ contains(github.event.pull_request.labels.*.name, 'bug') && !contains(github.event.pull_request.labels.*.name, 'bug1') }}) 
+      #     then
+      #         echo "component=IS" >> "$GITHUB_ENV"
+      #         # echo "set Value"
+      #     fi
+  
+  # print_text:
+  #   runs-on: Linux
+  #   steps:
+  #   - name: Checkout 
+  #     uses: actions/checkout@v2
+  #     with:
+  #       ref: ${{ github.head_ref }}
+  
+      - name: Run ls
+        run: |
+          ls
+        

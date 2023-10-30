@@ -7,5 +7,6 @@ permissions: write-all
 
 jobs:
   call-workflow1:
+    if: ${{ needs.filter-path.outputs.ctp == 'true' }}
     uses: ./.github/workflows/test-workflow2.yml
     secrets: inherit

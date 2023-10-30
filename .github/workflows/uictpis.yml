@@ -29,9 +29,9 @@ jobs:
     steps:
       - name: Run ls
         run: |
-         echo "${{ inputs.ui }}"
-         echo "${{ inputs.ctp }}"
-         echo "${{ inputs.is }}"
+         echo ${{ inputs.ui }}
+         echo ${{ inputs.ctp }}
+         echo ${{ inputs.is }}
       
   call-workflow-ci-ui:
     if: ${{ inputs.ui == 'true' }}

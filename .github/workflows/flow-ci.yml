@@ -48,6 +48,7 @@ jobs:
 
   call-workflow2-2:
     needs: print-component
+    if: failure();
     uses: ./.github/workflows/test-workflow2.yml
     secrets: inherit
 

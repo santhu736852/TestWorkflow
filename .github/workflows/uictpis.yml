@@ -1,0 +1,22 @@
+name: UI CTP IS
+
+on:
+  workflow_call:
+
+permissions: write-all
+
+jobs:
+  call-workflow-ci-ui:
+    if: ${{ needs.filter-path.outputs.ui == 'true' }}
+    uses: ./.github/workflows/ci-ui.yml
+    secrets: inherit
+
+  call-workflow-ci-ctp:
+    if: ${{ needs.filter-path.outputs.ctp == 'true' }}
+    uses: ./.github/workflows/ci-ctp.yml
+    secrets: inherit
+
+  call-workflow-ci-is:
+    if: ${{ needs.filter-path.outputs.is == 'true' }}
+    uses: ./.github/workflows/ci-is.yml
+    secrets: inherit

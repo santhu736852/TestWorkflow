@@ -36,25 +36,22 @@ jobs:
     uses: ./.github/workflows/callWorkflow2.yml
     secrets: inherit
 
-  call-workflow-ci-ui:
+  call-workflow-ci-ui-ctp-is:
     needs: [ call-workflow2job ]
-    if: ${{ needs.filter-path.outputs.ui == 'true' }}
-    uses: ./.github/workflows/ci-ui.yml
+    uses: ./.github/workflows/uictpis.yml
     secrets: inherit
 
-  call-workflow-ci-ctp:
-    needs: [ call-workflow2job ]
-    if: ${{ needs.filter-path.outputs.ctp == 'true' }}
-    uses: ./.github/workflows/ci-ctp.yml
-    secrets: inherit
+  # call-workflow-ci-ctp:
+  #   needs: [ call-workflow2job ]
+  #   uses: ./.github/workflows/ci-ctp.yml
+  #   secrets: inherit
 
-  call-workflow-ci-is:
-    needs: [ call-workflow2job ]
-    if: ${{ needs.filter-path.outputs.is == 'true' }}
-    uses: ./.github/workflows/ci-is.yml
-    secrets: inherit
+  # call-workflow-ci-is:
+  #   needs: [ call-workflow2job ]
+  #   uses: ./.github/workflows/ci-is.yml
+  #   secrets: inherit
 
-  call-workflow2-parallel:
-    needs: [ call-workflow-ci-ui, call-workflow-ci-ctp, call-workflow-ci-is ]
+  call-workflow2-series:
+    needs: [ call-workflow-ci-ui-ctp-is ]
     uses: ./.github/workflows/test-workflow2.yml
     secrets: inherit

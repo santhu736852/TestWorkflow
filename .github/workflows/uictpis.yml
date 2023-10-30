@@ -6,18 +6,18 @@ on:
         ui:
           description: UI component
           required: true
-          type: boolean
-          default: false
+          type: string
+          default: 'false'
         ctp:
           description: CTP component
           required: true
-          type: boolean
-          default: false
+          type: string
+          default: 'false'
         is:
           description: IS component
           required: true
-          type: boolean
-          default: false
+          type: string
+          default: 'false'
 
 permissions: write-all
 

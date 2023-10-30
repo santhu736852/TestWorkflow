@@ -7,19 +7,18 @@ on:
         description: UI component
         required: true
         type: string
-        default:
+        default: 'false'
       ctp:
         description: CTP component
         required: true
         type: string
-        default:
+        default: 'false'
       is:
         description: IS component
         required: true
         type: string
-        default:
+        default: 'false'
 
-            
 permissions: write-all
 
 jobs:

@@ -1,8 +1,7 @@
 name: FLOW CI
 
 on:
-  workflow_dispatch:
-  pull_request:
+  workflow_call:
 
 permissions: write-all
 

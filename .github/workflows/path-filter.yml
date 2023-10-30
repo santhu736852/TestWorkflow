@@ -27,6 +27,7 @@ jobs:
               - 'Folder3/**'
 
   print-path:
+    needs: filter-path
     runs-on: Linux
     steps: 
       - name: filterPath display
